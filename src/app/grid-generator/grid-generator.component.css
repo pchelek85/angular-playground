@@ -1,0 +1,18 @@
+textarea {
+  width: 100%;
+}
+.row {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 3px dashed #ccc;
+}
+.row .header {
+  margin: 10px;
+  padding: 10px;
+  background-color: blanchedalmond;
+  text-align: center;
+}
+.row .content {
+  display: flex;
+}
