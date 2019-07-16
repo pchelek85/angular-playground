@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GridGeneratorComponent } from './grid-generator/grid-generator.component';
 import { GridSingleComponent } from './grid-single/grid-single.component';
+import { DataComponent } from './data/data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridGeneratorComponent,
     GridSingleComponent,
+    DataComponent,
   ],
   imports: [
     BrowserModule,

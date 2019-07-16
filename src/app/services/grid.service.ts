@@ -1,38 +1,53 @@
 import { Injectable } from '@angular/core';
-import { Observable, interval, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { PageTemplate, RowAttrs, ColAttrs } from '../page-template.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GridService {
 
-  grid = [];
-  gridObs = new Subject<Array<any>>();
+  template: PageTemplate;
+  template$ = new Subject<PageTemplate>();
 
   constructor() { }
 
-  addRow() {
-    const length = this.grid.length;
-    this.grid.push({
-      rowID: length,
-      cols: [],
-      options: ''
-    });
-    this.gridObs.next(this.grid);
+  generateTemplate(templateName: string,templateType: string): void {
+    const randomID = Math.floor(Math.random() * 100000000000);
+    this.template = new PageTemplate(randomID, templateName, templateType);
+    this.template$.next(this.template);
+    // console.log(this.template);
   }
 
-  addCol(rowID, componentType, componentContent?) {
-    const newItem = {
-      colID: this.grid[rowID].cols.length,
+  addTemplateRow(): void {
+    const ID = this.template.rows.length + 1;
+    const order = this.template.rows.length + 1;
+    const attr: RowAttrs = { id: ID, order: order, options: 'custom options for row: margins, paddings' }
+    this.template.addRow(attr);
+    this.template$.next(this.template);
+    // console.log(this.template);
+  }
+
+  addTemplateCol(rowID: number, componentType: number, componentContent: string): void {
+    const newComponent: ColAttrs = {
+      id: this.template.cols.length + 1,
+      rowID: rowID,
       componentType: componentType,
-      componentContent: ''
+      componentContent: componentContent
     }
-    const selectedRow = this.grid[rowID].cols;
-    selectedRow.push(newItem);
+    this.template.addCol(newComponent);
+    this.template$.next(this.template);
   }
 
-  editComponent(content, rowID, colID) {
-    const componentID = this.grid[rowID].cols[colID];
-    componentID.componentContent = content;
+  editComponent(id: number, content: string): void {
+    const component = this.template.cols.find(data => data.id === id);
+    component.componentContent = content;
   }
+
+  deleteComponent(id: number): void {
+    const componentToDelete = this.template.cols.findIndex(data => data.id === id);
+    this.template.cols.splice(componentToDelete, 1);
+  }
+
+
 }

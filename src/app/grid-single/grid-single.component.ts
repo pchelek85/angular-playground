@@ -8,20 +8,20 @@ import { GridService } from '../services/grid.service';
 })
 export class GridSingleComponent implements OnInit {
 
-  @Input() rowID;
-  @Input() colID;
+  @Input() id: number;
 
   constructor(private gridService: GridService) { }
 
   ngOnInit() {
-    console.log(this.colID);
-    console.log(this.rowID);
+    // console.log(this.id);
   }
 
-  save(content) {
-    const rowID = this.rowID;
-    const colID = this.colID;
-    this.gridService.editComponent(content, rowID, colID);
+  save(content: string) {
+    this.gridService.editComponent(this.id, content);
+  }
+
+  delete() {
+    this.gridService.deleteComponent(this.id);
   }
 
 }
