@@ -4,7 +4,7 @@ textarea {
 
 .template-generator {
   padding: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   text-align: center;
   background: #073262;
 }
@@ -15,11 +15,13 @@ textarea {
 
 .row-generator {
   padding: 10px;
-  background: #f4f4f4;
+  /* background: #f4f4f4; */
   text-align: center;
-  margin-bottom: 20px;
+  border: 2px dashed #ccc;
+  margin-bottom: 10px;
 }
 .row-generator > button {
+  margin: 20px;
   padding: 5px 20px;
 }
 
@@ -31,14 +33,22 @@ textarea {
   margin-bottom: 10px;
 }
 .row .header {
+  display: flex;
+  justify-content: space-between;
   margin: 10px;
   padding: 10px;
   background-color: #0f61bc;
   text-align: center;
 }
-.row .header > * {
+.row .header div {
   padding: 5px 10px;
-  margin: 0 10px;
+}
+.row .header div button {
+  margin-left: 10px;
+}
+.row .header .row-id p {
+  color: #fff;
+  margin: 0;
 }
 .row .content {
   display: flex;

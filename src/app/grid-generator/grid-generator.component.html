@@ -9,32 +9,39 @@
 <div class="template-generator">
   <input type="text" placeholder="Template Name" #templateName>
   <select #templateType>
-      <option value="full-width" selected>Full width Template</option>
-      <option value="in-grid">Template in Grid</option>
-      <option value="sidebar">Template with Sidebar</option>
-    </select>
+    <option value="full-width" selected>Full width Template</option>
+    <option value="in-grid">Template in Grid</option>
+    <option value="sidebar">Template with Sidebar</option>
+  </select>
   <button (click)="generateTemplate(templateName.value, templateType.value)">Create New Template</button>
 </div>
 
-<div class="row-generator" *ngIf="template">
-    <button (click)="addTemplateRow()">Add New Row</button>
-</div>
-
-
 <div *ngIf="template">
-  <div class="row" *ngFor="let item of template.rows">
+  <div class="row" *ngFor="let item of template.rows; let i = index;">
     <div class="header">
-      <select #componentType>
-        <option value="1" selected>Text Component</option>
-        <option value="2">Custom Icon Component</option>
-        <option value="3">News Component</option>
-        <option value="4">Gallery Component</option>
-      </select>
-      <button (click)="addTemplateCol(item.id, componentType.value)">Add New Item in Row</button>
+      <div class="row-id">
+        <p class="row-id">Row ID: {{ i + 1 }}</p>
+      </div>
+      <div>
+        <select #componentType>
+          <option value="1" selected>Text Component</option>
+          <option value="2">Custom Icon Component</option>
+          <option value="3">News Component</option>
+          <option value="4">Gallery Component</option>
+        </select>
+        <button (click)="addTemplateCol(item.id, componentType.value)">Add New Item in Row</button>
+      </div>
     </div>
     <div class="content">
-      <!-- <app-grid-single [rowID]="item.rowID" [colID]="j" *ngFor="let component of template[i].cols; let j = index"></app-grid-single> -->
-      <app-grid-single [id]="component.id" *ngFor="let component of viewComponentsForRow(item.id)"></app-grid-single>
+
+        <ng-container *ngFor="let component of viewComponentsForRow(item.id); let j = index;">
+          <app-grid-single [id]="component.id"></app-grid-single>
+        </ng-container>
+
     </div>
   </div>
+</div>
+
+<div class="row-generator" *ngIf="template">
+  <button (click)="addTemplateRow()">Add New Row</button>
 </div>

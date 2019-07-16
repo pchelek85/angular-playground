@@ -1,8 +1,11 @@
 :host {
   display: block;
   margin: 10px;
+  padding: 20px;
   width: 100%;
-  min-height: 100px;
-  background: #f5f5f5;
+  min-height: 50px;
+  text-align: center;
+  /* background: #f5f5f5; */
+  border: 1px dashed #ccc;
   box-sizing: border-box;
 }
